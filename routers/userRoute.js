@@ -97,13 +97,12 @@ router.delete("/:id", (req, res) => {
     res.status(400).send(error);
   }
 });
-
+ 
 // Edit Users by ID
 router.put("/:id", (req, res) => {
   try {
     let sql = "UPDATE users SET ?";
     const {
-      email,
       password,
       full_name,
       billing_address,
@@ -116,7 +115,6 @@ router.put("/:id", (req, res) => {
     const hash = bcrypt.hashSync(password, salt);
     let user = {
       full_name,
-      email,
       password: hash,
       user_type,
       phone,
@@ -128,7 +126,7 @@ router.put("/:id", (req, res) => {
       if (err) throw err;
       console.log(result);
       res.send({
-        msg: `User ${(user.full_name, user.email)} has been edited`,
+        msg: `User ${(user.full_name)} has been edited`,
       });
     });
   } catch (error) {
