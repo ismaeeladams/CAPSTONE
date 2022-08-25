@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const con = require("../lib/db_connection");
 const bcrypt = require("bcryptjs");
+const middleware = require("../middleware/auth");
 
 // Get All Users
 router.get("/", (req, res) => {
@@ -34,7 +35,7 @@ router.get("/:id", (req, res) => {
 });
 
 // Add a booking
-router.post("/", (req, res) => {
+router.post("/", middleware, (req, res) => {
   try {
     let sql = "INSERT INTO rooms SET ?";
     const { size, bedrooms, bathrooms, price, description } = req.body;
@@ -61,7 +62,7 @@ router.post("/", (req, res) => {
 });
 
 // Edit booking by ID
-router.put("/:id", (req, res) => {
+router.put("/:id", middleware, (req, res) => {
   try {
     let sql = "UPDATE rooms SET ?";
     const { size, bedrooms, bathrooms, price, description, type } = req.body;
@@ -86,7 +87,7 @@ router.put("/:id", (req, res) => {
 });
 
 // Delete one booking
-router.delete("/:id", (req, res) => {
+router.delete("/:id", middleware, (req, res) => {
   try {
     con.query(
       `DELETE FROM rooms WHERE room_id = ${req.params.id}`,

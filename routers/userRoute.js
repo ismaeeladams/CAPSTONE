@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const con = require("../lib/db_connection");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
 // const middleware = require("../middleware/auth");
 
 // Get All Users
@@ -63,9 +65,9 @@ router.post("/register", (req, res) => {
       email,
       // We sending the hash value to be stored witin the table
       password: hash,
-      user_type,
+      user_type: "user",
       phone,
-      country,
+      country: "RSA",
       billing_address,
       default_shipping_address,
     };
@@ -97,7 +99,7 @@ router.delete("/:id", (req, res) => {
     res.status(400).send(error);
   }
 });
- 
+
 // Edit Users by ID
 router.put("/:id", (req, res) => {
   try {
@@ -126,7 +128,7 @@ router.put("/:id", (req, res) => {
       if (err) throw err;
       console.log(result);
       res.send({
-        msg: `User ${(user.full_name)} has been edited`,
+        msg: `User ${user.full_name} has been edited`,
       });
     });
   } catch (error) {
