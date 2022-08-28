@@ -63,7 +63,6 @@ router.post("/register", (req, res) => {
     let user = {
       full_name,
       email,
-      // We sending the hash value to be stored witin the table
       password: hash,
       user_type: "user",
       phone,
