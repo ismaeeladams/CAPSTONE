@@ -45,6 +45,7 @@ router.post("/register", (req, res) => {
       full_name,
       email,
       password,
+      image,
       user_type,
       phone,
       country,
@@ -64,7 +65,8 @@ router.post("/register", (req, res) => {
       full_name,
       email,
       password: hash,
-      user_type: "user",
+      image,
+      user_type,
       phone,
       country: "RSA",
       billing_address,
@@ -106,6 +108,7 @@ router.put("/:id", (req, res) => {
     const {
       password,
       full_name,
+      image,
       billing_address,
       default_shipping_address,
       country,
@@ -116,6 +119,7 @@ router.put("/:id", (req, res) => {
     const hash = bcrypt.hashSync(password, salt);
     let user = {
       full_name,
+      image,
       password: hash,
       user_type,
       phone,
