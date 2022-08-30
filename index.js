@@ -6,9 +6,9 @@ app.set("port", process.env.PORT || 8008); // Set the port
 app.use(express.json()); // Enable the server to handle JSON requests
 app.use(cors()); // Dont let local development give errors
 
-app.get("/", (req, res) => {
-  res.json({ msg: "Welcome" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ msg: "Welcome" });
+// });
 
 const userRoute = require("./routers/userRoute");
 const bookingRoute = require("./routers/bookingRoute");
