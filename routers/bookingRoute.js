@@ -38,15 +38,31 @@ router.get("/:id", (req, res) => {
 router.post("/", middleware, (req, res) => {
   try {
     let sql = "INSERT INTO rooms SET ?";
-    const { size, bedrooms, bathrooms, price, description } = req.body;
-
-    // Database terms
-    let room = {
+    const {
+      name,
       size,
       bedrooms,
       bathrooms,
       price,
       description,
+      type,
+      image,
+      image_2,
+      image_3,
+    } = req.body;
+
+    // Database terms
+    let room = {
+      name,
+      size,
+      bedrooms,
+      bathrooms,
+      price,
+      description,
+      type,
+      image,
+      image_2,
+      image_3,
     };
     // Connection to database
     con.query(sql, room, (err, result) => {
@@ -65,14 +81,29 @@ router.post("/", middleware, (req, res) => {
 router.put("/:id", middleware, (req, res) => {
   try {
     let sql = "UPDATE rooms SET ?";
-    const { size, bedrooms, bathrooms, price, description, type } = req.body;
-    let user = {
+    const {
+      name,
       size,
       bedrooms,
       bathrooms,
       price,
       description,
       type,
+      image,
+      image_2,
+      image_3,
+    } = req.body;
+    let user = {
+      name,
+      size,
+      bedrooms,
+      bathrooms,
+      price,
+      description,
+      type,
+      image,
+      image_2,
+      image_3,
     };
     con.query(sql, user, (err, result) => {
       if (err) throw err;

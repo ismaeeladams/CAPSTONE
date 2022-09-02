@@ -48,9 +48,6 @@ router.post("/register", (req, res) => {
       image,
       user_type,
       phone,
-      country,
-      billing_address,
-      default_shipping_address,
     } = req.body;
 
     // The start of hashing / encryption
@@ -66,11 +63,8 @@ router.post("/register", (req, res) => {
       email,
       password: hash,
       image,
-      user_type,
+      user_type: "user",
       phone,
-      country: "RSA",
-      billing_address,
-      default_shipping_address,
     };
     // Connection to database
     con.query(sql, user, (err, result) => {
@@ -109,9 +103,6 @@ router.put("/:id", (req, res) => {
       password,
       full_name,
       image,
-      billing_address,
-      default_shipping_address,
-      country,
       phone,
       user_type,
     } = req.body;
@@ -123,9 +114,6 @@ router.put("/:id", (req, res) => {
       password: hash,
       user_type,
       phone,
-      country,
-      billing_address,
-      default_shipping_address,
     };
     con.query(sql, user, (err, result) => {
       if (err) throw err;
@@ -174,9 +162,6 @@ router.post("/login", (req, res) => {
               email: result[0].email,
               user_type: result[0].user_type,
               phone: result[0].phone,
-              country: result[0].country,
-              billing_address: result[0].billing_address,
-              default_shipping_address: result[0].default_shipping_address,
             },
           };
           // Creating a token and setting expiry date
