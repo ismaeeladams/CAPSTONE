@@ -11,12 +11,14 @@ app.use(cors()); // Dont let local development give errors
 // });
 
 const userRoute = require("./routers/userRoute");
-const bookingRoute = require("./routers/bookingRoute");
+const roomRoute = require("./routers/roomRoute");
 const reviewRoute = require("./routers/reviewRoute");
+const reservationRoute = require("./routers/reservationRoute");
 
 app.use("/users", userRoute);
-app.use("/bookings", bookingRoute);
+app.use("/rooms", roomRoute);
 app.use("/reviews", reviewRoute);
+app.use("/reservations", reservationRoute);
 
 app.listen(app.get("port"), () => {
   console.log(`Listening for calls on port ${app.get("port")}`);
