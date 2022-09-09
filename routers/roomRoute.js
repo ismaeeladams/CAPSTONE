@@ -35,7 +35,7 @@ router.get("/:id", (req, res) => {
 });
 
 // Add a booking
-router.post("/", middleware, (req, res) => {
+router.post("/", (req, res) => {
   try {
     let sql = "INSERT INTO rooms SET ?";
     const {

@@ -35,21 +35,35 @@ router.get("/:id", (req, res) => {
 
 // Add new reservation
 router.post("/", middleware, (req, res) => {
-  const { reservation } = req.body;
+  console.log("test");
+  const {
+    image_2,
+    image,
+    image_3,
+    name,
+    size,
+    bedrooms,
+    bathrooms,
+    price,
+    description,
+    type,
+  } = req.body;
+
+  const reservation = [];
+  const booking = JSON.stringify(req.body);
+  reservation.push(booking);
+  console.log(reservation);
   try {
     let sql = "SELECT * FROM users WHERE ?";
-
     const user = {
       user_id: req.user.user_id,
     };
-
     con.query(sql, user, (err, result) => {
       if (err) throw err;
       let orderSql = "INSERT INTO reservation SET ?";
-      let jsonCart = JSON.stringify(reservation);
       let order = {
         user_id: result[0].user_id,
-        reservation: jsonCart,
+        reservation: reservation,
       };
       con.query(orderSql, order, (err, result) => {
         if (err) throw err;
