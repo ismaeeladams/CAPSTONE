@@ -78,7 +78,7 @@ router.post("/", (req, res) => {
 });
 
 // Edit booking by ID
-router.put("/:id", middleware, (req, res) => {
+router.patch("/:id", middleware, (req, res) => {
   try {
     let sql = "UPDATE rooms SET ?";
     const {
